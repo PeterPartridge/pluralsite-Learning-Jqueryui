@@ -1,0 +1,201 @@
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Example Page</title>
+	<link href="jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet">
+<style>
+#dragable
+{
+  border:0.2em solid black;
+  background-color: gray;
+
+}
+
+.ui-draggable
+{
+  background-color:blue;
+  height: 5em;
+  width: 5em;
+  display: inline-block;
+  border: 0.2em solid balck;
+border-radius: 50%;
+text-align: center;
+box-shadow: 0.5em 0.5em 0.5em black
+}
+
+.ui-draggable header{
+
+  background-color: red;
+  color:ffffff;
+  padding: 1em;
+}
+
+#trashCan
+{
+  background-color: orange;
+  width: 5em;
+  height: 6em;
+}
+
+.opaque
+{
+  opacity:1.0;
+}
+
+.semi-transparent
+{
+  opacity:0.6;
+}
+
+.normal
+{
+  background-color: black;
+  width: 5em;
+  height:5em;
+  position:relative;
+}
+
+.bigTarget
+{
+  width:10em;
+  height: 10em;
+  right:-15em;
+  border:2em solid black;
+}
+
+</style>
+
+
+</head>
+<body>
+<h1>Jquery Interactions</h1>
+
+
+<div id="target" class="normal">
+
+</div>
+
+<br />
+
+
+
+
+
+  <section id="dragable">
+<div id="div1">
+<header>
+  A
+</header >
+</div>
+<div id="div2">
+  <header>
+    B
+  </header>
+</div>
+<div id="div5">
+  <header>
+    E
+  </header>
+</div>
+
+<div id="div4">
+  <header>
+    D
+  </header>
+</div>
+
+<div id="div3">
+  <header>
+    C
+  </header>
+</div>
+
+  </section>
+</body>
+<br />
+<div id="trashCan" class="semi-transparent" >
+
+</div>
+
+
+<section>
+<ul id="sortable">
+  <li>
+    c#
+  </li>
+  <li>
+    C
+  </li>
+  <li>
+    python
+  </li>
+  <li>
+    C++
+  </li>
+  <li>
+    ruby
+  </li>
+</ul>
+
+
+
+</section>
+
+
+<footer>
+  <script src="jquery-ui-1.11.4/external/jquery/jquery.js"></script>
+  <script src="jquery-ui-1.11.4/jquery-ui.js"></script>
+  <script>
+
+  $(function(){
+$("#div1").draggable({axis:"x", snap:"#div2, #div3"});
+$("#div2").draggable({grid:[50, 100]});
+$("#div3").draggable({containment:"#dragable",
+helper:function(){
+  return $("<div> I am a helper </div>")}});
+
+$("#div4").draggable(
+{revert:"invalid"}
+
+);
+$("#div5").draggable({
+revert:"invalid"
+
+});
+
+$("#div1, #div2, #div3").draggable("option", "stack", ".ui-draggable")
+
+
+$("#trashCan").droppable({
+activeClass: "opaique",
+
+accept:"#div5",
+
+  drop: function(event, ui){ui.draggable.hide("explode");
+}
+
+});
+
+$("#sortable").sortable();
+
+
+ $("#nothing").click(function(){$(this).animate({
+left:300,
+
+}, 1000, "easeInOutElastic");
+
+});
+
+$("#target").click(function(){
+$(this).toggleClass("bigTarget", "slow");
+});
+
+});
+
+
+
+
+
+
+  </script>
+
+</footer>
